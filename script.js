@@ -53,6 +53,7 @@ function signUp(email, password) {
             // Signed up 
             const user = userCredential.user;
             console.log('User signed up:', user);
+            window.location.href = 'get-user-detail.html?uid=' + user.uid;
 
             // You can add additional user data to the database here if needed
         })
