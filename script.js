@@ -116,9 +116,21 @@ if (welcomeMessage) {
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert('Please select a file');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
     try {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
+            body: formData
         });
 
         if (!response.ok) {
@@ -128,13 +140,14 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
         // Force browser to reload the image
         const timestamp = new Date().getTime();
-        const resultDiv = document.getElementById('resultDiv');
-        resultDiv.innerHTML = `<img src="http://localhost:5000/static/smtgelse.png?t=${timestamp}" alt="Processed Image">`;
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `<img src="http://localhost:5000/static/processed.png?t=${timestamp}" alt="Processed Image">`;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         alert(`Error: ${error.message}`);
     }
 });
+
 
 const usersRef = ref(database, 'users');
 onValue(usersRef, (snapshot) => {
