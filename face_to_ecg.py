@@ -220,7 +220,7 @@ def keypress_action(keypress):
 
 # Hardcoded values
 # capture_device = 0  # Set to the camera device, e.g., 0 for default camera
-video_filename = "THIRTY.mp4"  # Set this to a file path if you're using a video file
+video_filename = "../../JupyterNotebooks/intel_thingy/Intel-oneAPI-proj/THIRTY.mp4"  # Set this to a file path if you're using a video file
 video_width = 1920
 # Hardcoded resolution width
 video_height = 1080  # Hardcoded resolution height
