@@ -119,6 +119,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     const formData = new FormData();
     const videoFile = document.getElementById('videoInput').files[0];
     formData.append('video', videoFile);
+
     try {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
@@ -132,12 +133,12 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
 
-        resultDiv.innerHTML = `<img src="${"./smtgelse.png"}" alt="Processed Image">`;
+        const resultDiv = document.getElementById('resultDiv');
+        resultDiv.innerHTML = `<img src="${imageUrl}" alt="Processed Image">`;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
-
-})
+});
 
 const usersRef = ref(database, 'users');
 onValue(usersRef, (snapshot) => {

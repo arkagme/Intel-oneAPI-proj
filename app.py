@@ -1,12 +1,16 @@
 from flask import Flask, request, send_file
+from flask_cors import CORS
 import os
 import subprocess
 import tempfile
 
 app = Flask(__name__)
+CORS(app)  # This will enable CORS for all routes
+
 @app.route('/')
 def index():
     return 'Welcome to the video processing server!'
+
 @app.route('/upload', methods=['POST'])
 def upload_video():
     if 'video' not in request.files:
@@ -26,7 +30,7 @@ def upload_video():
         processed_image_path = os.path.join(tmpdirname, 'smtgelse.png')
 
         # Run the video processing script
-        # Ensure 'process_video.py' is in the same directory as 'app.py'
+        # Ensure 'face_to_ecg.py' is in the same directory as 'app.py'
         try:
             subprocess.run(['python3', 'face_to_ecg.py', '-f', video_path], check=True)
         except subprocess.CalledProcessError as e:
@@ -43,4 +47,4 @@ if __name__ == '__main__':
     # Ensure the uploads directory exists
     if not os.path.exists('uploads'):
         os.makedirs('uploads')
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True) 
