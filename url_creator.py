@@ -1,4 +1,4 @@
-from firebase_admin import credentials, storage, db
+from firebase_admin import credentials, storage, db, auth
 from datetime import datetime
 import firebase_admin
 
@@ -29,3 +29,20 @@ def add_history(uid,png):
     user_ref = db.reference(f'/{uid}/history/{formatted_date}')
     user_ref.set({'ecgImg': img_url})
     print("updation successful")
+
+def get_details(uid):
+    # Reference the user data node (replace 'user_id' with the actual user identifier)
+    user_ref = db.reference(f'/{uid}')
+
+    # Retrieve the user data
+    user_data = user_ref.get()
+
+    # Extract and print the name, age, and gender (if available)
+    if user_data:
+        name = user_data.get('name', 'No name available')
+        age = user_data.get('age', 'No age available')
+        gender = user_data.get('gender', 'No gender available')  # Add gender if it's available in the data
+        return [name,age,gender]
+    else:
+        print("User data not found.")
+        return None
