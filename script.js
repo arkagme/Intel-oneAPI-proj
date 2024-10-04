@@ -118,7 +118,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
     const formData = new FormData();
     const videoFile = document.getElementById('videoInput').files[0];
-    formData.append('video', videoInput.files[0]);
+    formData.append('video', videoFile);
     try {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
