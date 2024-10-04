@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove , get } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
@@ -20,31 +20,29 @@ const database = getDatabase(app);
 
 const emailInput = document.getElementById('email-input');
 const passwordInput = document.getElementById('password-input');
-const signInButton = document.getElementById('signin-button');
-const signUpButton = document.getElementById('signup-button');
+let signInButton = document.getElementById('signin-button');
+let signUpButton = document.getElementById('signup-button');
+let welcomeMessage = document.getElementById('username');
+
 
 function signIn(email, password) {
+    console.log('signIn', email, password);
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
+            const userId = user.uid;
             console.log('User signed in:', user);
-
-            // Example of writing to the database
-            const userRef = ref(database, 'users/' + user.uid);
-            push(userRef, {
-                email: user.email,
-                lastLogin: new Date().toISOString()
-            });
-
+            window.location.href = 'dashboard.html?uid=' + userId;
+            })
             // You can redirect the user or update the UI here
-        })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Error:', errorCode, errorMessage);
         });
 }
+
 
 
 function signUp(email, password) {
@@ -69,20 +67,50 @@ function signUp(email, password) {
         })
     }
 
-
-
-
+if(signInButton){
 signInButton.addEventListener('click', () => {
     const email = emailInput.value;
     const password = passwordInput.value;
     signIn(email, password);
 });
+}
 
+if(signUpButton){
 signUpButton.addEventListener('click', () => {
     const email = emailInput.value;
     const password = passwordInput.value;
     signUp(email, password);
 });
+}
+
+function loadDashboard() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('uid');
+
+    if (userId && welcomeMessage) {
+        const userRef = ref(database, '/' + userId);
+        get(userRef)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    const username = userData.name;
+                    welcomeMessage.textContent = `Welcome ${username}`;
+                } else {
+                    console.log('No data available');
+                    welcomeMessage.textContent = 'Welcome User';
+                }
+            })
+            .catch((error) => {
+                console.error('Error loading user data:', error);
+                welcomeMessage.textContent = 'Welcome User';
+            });
+    }
+}
+
+// Call loadDashboard when the page loads
+if (welcomeMessage) {
+    loadDashboard();
+}
 
 const usersRef = ref(database, 'users');
 onValue(usersRef, (snapshot) => {
