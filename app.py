@@ -37,3 +37,5 @@ def process_video():
 
         # Send the processed image back to the frontend
         return send_file(processed_image_path, mimetype='image/png')
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
