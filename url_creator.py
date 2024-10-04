@@ -1,32 +1,32 @@
-from firebase_admin import credentials, initialize_app, storage, db
-from datetime import date
+from firebase_admin import credentials, storage, db
+from datetime import datetime
 import firebase_admin
 
+cred = credentials.Certificate("credentials.json")
+firebase_admin.initialize_app(cred, {'databaseURL': 'https://intel-oneapi-default-rtdb.asia-southeast1.firebasedatabase.app/',
+                                     'storageBucket': 'intel-oneapi.appspot.com'})
 def url(image_path):
-    cred = credentials.Certificate("credentials.json")
-    initialize_app(cred, {'storageBucket': 'intel-oneapi.appspot.com'})
-
     # Put your local file path
-    fileName = "satori.jpg"
+    fileName = image_path
+    print(image_path)
     bucket = storage.bucket()
     blob = bucket.blob(fileName)
     blob.upload_from_filename(fileName)
 
     # Opt : if you want to make public access from the URL
-    result = blob.make_public()
-    return result
+    blob.make_public()
+    public_url = blob.public_url
+    print(f"Image uploaded successfully. Public URL: {public_url}")
+    return public_url
 
-def add_history(uid,png):
-    current_date = date.today()
-    formatted_date = current_date.strftime("%B %d, %Y")
+def add_history(png):
+    current_date = datetime.now()
+    formatted_date = current_date.strftime("%Y-%m-%d")
+    formatted_date = str(formatted_date)
+    print(formatted_date)
     img_url = url(png)
 
-    # Initialize Firebase app
-    cred = credentials.Certificate("credentials.json")
-    firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://intel-oneapi-default-rtdb.asia-southeast1.firebasedatabase.app/'
-    })
-
-    user_ref = db.reference(f'/{uid}/history/{formatted_date}')
-    user_ref.set({'ecgImg': img_url})
+    user_ref = db.reference(f'/5Jexko4y8WYiTETogfnouLkPnTP2/history/{formatted_date}')
+    user_ref.set({'ecgImg': img_url,
+                  'status':'1'})
     print("updation successful")

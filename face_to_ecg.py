@@ -36,6 +36,7 @@ import cupyx.scipy.ndimage as cuimg
 import matplotlib.pyplot as plt
 import matplotlib
 import os
+import url_creator
 
 # Set up command line argument to process a file rather than live video
 import argparse
@@ -414,7 +415,7 @@ ax.plot('time', 'blue', data=data, color='blue')
 ax.set_xlabel('time')
 ax.set_ylabel('RGB')
 # plt.show()
-plt.savefig("smtg.png")
+plt.savefig("samshu.png")
 
 data2 = {'time': np.array(range(100, int(total_frames) - 100)) / fps,
          'luminance': cp.asnumpy(ppg_yuv_ma[100:-100:, 0]),
@@ -429,5 +430,7 @@ ax.set_xlabel('time')
 ax.set_ylabel('YUV')
 # plt.show()
 plt.savefig("smtgelse.png")
+
+url_creator.add_history("samshu.png")
 
 # Reopen the video
