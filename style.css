@@ -1,0 +1,14 @@
+body{
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input{
+    padding : 10px 5px 10px 5px;
+
+}
+button{
+    margin-top : 10px;
+    padding : 10px 5px 10px 5px;
+}
