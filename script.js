@@ -134,7 +134,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         const imageUrl = URL.createObjectURL(blob);
 
         const resultDiv = document.getElementById('resultDiv');
-        resultDiv.innerHTML = `<img src="${imageUrl}" alt="Processed Image">`;
+        resultDiv.innerHTML = `<img src="./smtgelse.png" alt="Processed Image">`;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }

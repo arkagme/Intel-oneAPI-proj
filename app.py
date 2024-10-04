@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, request, send_file
 from flask_cors import CORS
 import os
 import subprocess
@@ -10,8 +10,7 @@ CORS(app)  # This will enable CORS for all routes
 @app.route('/')
 def index():
     return 'Welcome to the video processing server!'
-
-@app.route('/upload', methods=['GET'])
+@app.route('/upload', methods=['POST'])
 def process_video():
     # Hardcoded video filename
     video_filename = 'THIRTY.mp4'
@@ -28,7 +27,7 @@ def process_video():
         # Run the video processing script
         # Ensure 'face_to_ecg.py' is in the same directory as 'app.py'
         try:
-            subprocess.run(['python3', 'face_to_ecg.py', '-f', video_path], check=True)
+            subprocess.run(['python', 'face_to_ecg.py', '-f', video_path], check=True)
         except subprocess.CalledProcessError as e:
             return f'Video processing failed: {str(e)}', 500
 
@@ -38,6 +37,3 @@ def process_video():
 
         # Send the processed image back to the frontend
         return send_file(processed_image_path, mimetype='image/png')
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
