@@ -1,5 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, auth, db
+from datetime import date
 
 # Initialize Firebase app
 cred = credentials.Certificate("credentials.json")
@@ -16,7 +17,7 @@ def create_user(email, password,name,age):
         print(f"User created successfully: {user.uid}")
 
         # Create a node for the user in the Realtime Database
-        user_ref = db.reference(f'users/{user.uid}')
+        user_ref = db.reference(f'/{user.uid}')
         user_ref.set({
             'email': email,
             'name': name,
@@ -24,7 +25,7 @@ def create_user(email, password,name,age):
             'history':{'date1':{'status':0,
                                 'ecgImg':'https://youtu.be/dQw4w9WgXcQ?si=b4640JS83rWOcQXw'},
                        'date2':{'status':0,
-                                'ecgImg':'https://youtu.be/dQw4w9WgXcQ?si=b4640JS83rWOcQXw'}
+                                'ecgImg':'https://youtu.be/dQw4w9WgXcQ?si=b4640JS83rWOcQXw'}76yujnnh
                        }
             # Add any other user data you want to store
         })
@@ -45,11 +46,21 @@ def get_user(email):
         print(f"No user found for email: {email}")
         return None
 
+def add_history(email,png,status):
+    current_date = date.today()
+    formatted_date = current_date.strftime("%B %d, %Y")
+    uid = get_user(email)
+    user_ref = db.reference(f'/{uid}/history/{formatted_date}')
+    user_ref.set({'status': status,
+                  'ecgImg': png
+                    })
+    print("updation successful")
 
 # Example usage
 if __name__ == "__main__":
     # Create a new user
-    new_user_uid = create_user("user@example.com", "password123",'shree',43)
+    #new_user_uid = create_user("user@example.com", "password123",'shree',43)
 
     # Get an existing user
-    existing_user_uid = get_user("user@example.com")
+    #existing_user_uid = get_user("user@example.com")
+    add_history("user@example.com",'https://youtu.be/dQw4w9WgXcQ?si=b4640JS83rWOcQXw',1)
