@@ -14,7 +14,7 @@ def index():
 @app.route('/upload', methods=['GET'])
 def process_video():
     # Hardcoded video filename
-    video_filename = 'thirty.mp4'
+    video_filename = 'THIRTY.mp4'
     video_path = os.path.join(os.path.dirname(__file__), video_filename)
 
     if not os.path.exists(video_path):
