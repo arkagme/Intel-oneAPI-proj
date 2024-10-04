@@ -37,6 +37,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import os
 import url_creator
+from datetime import datetime
 
 # Set up command line argument to process a file rather than live video
 import argparse
@@ -415,7 +416,10 @@ ax.plot('time', 'blue', data=data, color='blue')
 ax.set_xlabel('time')
 ax.set_ylabel('RGB')
 # plt.show()
-plt.savefig("samshu.png")
+current_time = datetime.now()
+formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+file_to_store = f"{formatted_time}.png"
+plt.savefig(file_to_store)
 
 data2 = {'time': np.array(range(100, int(total_frames) - 100)) / fps,
          'luminance': cp.asnumpy(ppg_yuv_ma[100:-100:, 0]),
@@ -431,6 +435,5 @@ ax.set_ylabel('YUV')
 # plt.show()
 plt.savefig("smtgelse.png")
 
-url_creator.add_history("samshu.png")
-
+url_creator.add_history("5Jexko4y8WYiTETogfnouLkPnTP2",file_to_store)
 # Reopen the video
