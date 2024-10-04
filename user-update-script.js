@@ -33,7 +33,7 @@ document.getElementById('userDetailsForm').addEventListener('submit', function(e
 
     const timestamp = new Date().toISOString().slice(0,10).replace(/[:.]/g, '-');
 
-    // Update user details in the database
+    
     set(ref(database, '/' + uid), {
         name: name,
         age: age,
@@ -46,8 +46,7 @@ document.getElementById('userDetailsForm').addEventListener('submit', function(e
     }).then(() => {
         console.log('User details updated successfully');
         alert('Profile created successfully!');
-        // You can redirect to another page or update the UI here
-        // For example: window.location.href = 'welcome.html';
+      
     }).catch((error) => {
         console.error('Error updating user details:', error);
         alert('An error occurred. Please try again.');
