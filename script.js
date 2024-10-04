@@ -116,7 +116,7 @@ if (welcomeMessage) {
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const fileInput = document.getElementById('fileInput');
+    const fileInput = document.getElementById('videoInput');
     const file = fileInput.files[0];
 
     if (!file) {
