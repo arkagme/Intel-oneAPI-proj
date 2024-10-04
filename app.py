@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, send_file
 from flask_cors import CORS
 import os
 import subprocess
@@ -11,21 +11,17 @@ CORS(app)  # This will enable CORS for all routes
 def index():
     return 'Welcome to the video processing server!'
 
-@app.route('/upload', methods=['POST'])
-def upload_video():
-    if 'video' not in request.files:
-        return 'No video part in the request', 400
+@app.route('/upload', methods=['GET'])
+def process_video():
+    # Hardcoded video filename
+    video_filename = 'thirty.mp4'
+    video_path = os.path.join(os.path.dirname(__file__), video_filename)
 
-    video_file = request.files['video']
+    if not os.path.exists(video_path):
+        return f'Video file {video_filename} not found', 404
 
-    if video_file.filename == '':
-        return 'No selected video', 400
-
-    # Create a temporary directory to store the uploaded video and processed image
+    # Create a temporary directory to store the processed image
     with tempfile.TemporaryDirectory() as tmpdirname:
-        video_path = os.path.join(tmpdirname, video_file.filename)
-        video_file.save(video_path)
-
         # Path where the processed image will be saved
         processed_image_path = os.path.join(tmpdirname, 'smtgelse.png')
 
@@ -34,7 +30,7 @@ def upload_video():
         try:
             subprocess.run(['python3', 'face_to_ecg.py', '-f', video_path], check=True)
         except subprocess.CalledProcessError as e:
-            return 'Video processing failed: ' + str(e), 500
+            return f'Video processing failed: {str(e)}', 500
 
         # Check if the image was created
         if not os.path.exists(processed_image_path):
@@ -44,7 +40,4 @@ def upload_video():
         return send_file(processed_image_path, mimetype='image/png')
 
 if __name__ == '__main__':
-    # Ensure the uploads directory exists
-    if not os.path.exists('uploads'):
-        os.makedirs('uploads')
-    app.run(host='0.0.0.0', port=5000, debug=True) 
+    app.run(host='0.0.0.0', port=5000, debug=True)
