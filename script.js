@@ -55,6 +55,10 @@ function signUp(email, password) {
             console.log('User signed up:', user);
             window.location.href = 'get-user-detail.html?uid=' + user.uid;
 
+            const userRef = ref(database, '/' + user.uid);
+            push(userRef, {
+                email: email, 
+            })
             // You can add additional user data to the database here if needed
         })
         .catch((error) => {

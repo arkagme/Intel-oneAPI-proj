@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { getDatabase, ref, set , push} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDRE096DfU3ZLC-yASMFEqtBDDuM-HIV74",
@@ -28,12 +28,21 @@ document.getElementById('userDetailsForm').addEventListener('submit', function(e
     }
 
     const name = document.getElementById('nameInput').value;
-    const age = document.getElementById('dobInput').value;
+    const age = document.getElementById('ageInput').value;
+    const gender = document.getElementById('genderInput').value;
+
+    const timestamp = new Date().toISOString().slice(0,10).replace(/[:.]/g, '-');
 
     // Update user details in the database
-    set(ref(database, 'users/' + uid), {
+    set(ref(database, '/' + uid), {
         name: name,
-        age: age
+        age: age,
+        gender : gender,
+        history : {[timestamp]: {
+            status: 0,
+            ecgImg: 'https://youtu.be/dQw4w9WgXcQ?si=b4640JS83rWOcQXw'
+        }
+        }
     }).then(() => {
         console.log('User details updated successfully');
         alert('Profile created successfully!');
