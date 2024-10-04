@@ -139,9 +139,14 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         }
 
         // Force browser to reload the image
-        const timestamp = new Date().getTime();
         const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<img src="http://localhost:5000/upload/image/png" alt="Processed Image">`;
+        const imageUrl = URL.createObjectURL(blob);
+        resultDiv.innerHTML = `<img src="${imageUrl}" alt="Processed Image">`;
+
+        const img = resultDiv.querySelector('img');
+        img.onload = () => {
+            URL.revokeObjectURL(imageUrl);
+        };
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         alert(`Error: ${error.message}`);
