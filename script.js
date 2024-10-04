@@ -65,8 +65,11 @@ function signUp(email, password) {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Error:', errorCode, errorMessage);
-        });
-}
+            alert(errorMessage)
+        })
+    }
+
+
 
 
 signInButton.addEventListener('click', () => {
