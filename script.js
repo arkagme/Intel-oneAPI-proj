@@ -141,7 +141,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         // Force browser to reload the image
         const resultDiv = document.getElementById('result');
         const imageUrl = URL.createObjectURL(blob);
-        resultDiv.innerHTML = `<img src="./testfolder/smtgelse.png" alt="Processed Image">`;
+        resultDiv.innerHTML = `<img src="smtgelse.png" alt="Processed Image">`;
 
         const img = resultDiv.querySelector('img');
         img.onload = () => {
