@@ -116,27 +116,23 @@ if (welcomeMessage) {
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    const videoFile = document.getElementById('videoInput').files[0];
-    formData.append('video', videoFile);
-
     try {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
-            body: formData,
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            const errorText = await response.text();
+            throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
         }
 
-        const blob = await response.blob();
-        const imageUrl = URL.createObjectURL(blob);
-
+        // Force browser to reload the image
+        const timestamp = new Date().getTime();
         const resultDiv = document.getElementById('resultDiv');
-        resultDiv.innerHTML = `<img src="./smtgelse.png" alt="Processed Image">`;
+        resultDiv.innerHTML = `<img src="http://localhost:5000/static/smtgelse.png?t=${timestamp}" alt="Processed Image">`;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
+        alert(`Error: ${error.message}`);
     }
 });
 

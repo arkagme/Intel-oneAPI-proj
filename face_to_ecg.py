@@ -434,6 +434,5 @@ ax.set_xlabel('time')
 ax.set_ylabel('YUV')
 # plt.show()
 plt.savefig("smtgelse.png")
-
 url_creator.add_history("5Jexko4y8WYiTETogfnouLkPnTP2",file_to_store)
-# Reopen the video
+# Reopen the videourlzzzz
