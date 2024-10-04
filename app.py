@@ -29,15 +29,12 @@ def process_video():
         file.save(video_path)
 
         # Path where the processed image will be saved
-        processed_image_path = os.path.join(tmpdirname, './smtgelse.png')
+        processed_image_path = os.path.join(tmpdirname, 'smtgelse.png')
 
         # Run the video processing script
         # Ensure 'face_to_ecg.py' is in the same directory as 'app.py'
         try:
-            subprocess.run(['python', './face_to_ecg.py', '-f', video_path], check=True,
-            cwd=tmpdirname,  # Set the working directory to the temporary directory
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE)
+            subprocess.run(['python', 'face_to_ecg.py', '-f', video_path], check=True)
         except subprocess.CalledProcessError as e:
             return f'Video processing failed: {str(e)}', 500
 
