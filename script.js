@@ -141,7 +141,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         // Force browser to reload the image
         const timestamp = new Date().getTime();
         const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<img src="http://localhost:5000/static/processed.png?t=${timestamp}" alt="Processed Image">`;
+        resultDiv.innerHTML = `<img src="http://localhost:5000/upload/image/png" alt="Processed Image">`;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         alert(`Error: ${error.message}`);
