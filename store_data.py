@@ -25,7 +25,7 @@ def create_user(email, password,name,age):
             'history':{'date1':{'status':0,
                                 'ecgImg':'https://youtu.be/dQw4w9WgXcQ?si=b4640JS83rWOcQXw'},
                        'date2':{'status':0,
-                                'ecgImg':'https://youtu.be/dQw4w9WgXcQ?si=b4640JS83rWOcQXw'}76yujnnh
+                                'ecgImg':'https://youtu.be/dQw4w9WgXcQ?si=b4640JS83rWOcQXw'}
                        }
             # Add any other user data you want to store
         })
