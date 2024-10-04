@@ -118,27 +118,26 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
     const formData = new FormData();
     const videoFile = document.getElementById('videoInput').files[0];
-    formData.append('image', videoFile);
-
+    formData.append('video', videoInput.files[0]);
     try {
-        const response = await fetch('http://74.225.249.32:5000/', {
+        const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
-            body: formData
+            body: formData,
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Image processing failed');
+            throw new Error('Network response was not ok');
         }
 
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
-        const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<h2>The output</h2><img src="${imageUrl}" alt="Grayscale Image">`;
+
+        resultDiv.innerHTML = `<img src="${"./smtgelse.png"}" alt="Processed Image">`;
     } catch (error) {
-        alert(error.message);
+        console.error('There was a problem with the fetch operation:', error);
     }
-});
+
+})
 
 const usersRef = ref(database, 'users');
 onValue(usersRef, (snapshot) => {
