@@ -20,6 +20,7 @@ const database = getDatabase(app);
 
 const emailInput = document.getElementById('email-input');
 const passwordInput = document.getElementById('password-input');
+const uploadbutton = document.getElementById('upload-button')
 let signInButton = document.getElementById('signin-button');
 let signUpButton = document.getElementById('signup-button');
 let welcomeMessage = document.getElementById('username');
@@ -29,13 +30,13 @@ function signIn(email, password) {
     console.log('signIn', email, password);
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
+
+             const user = userCredential.user;
             const userId = user.uid;
             console.log('User signed in:', user);
             window.location.href = 'dashboard.html?uid=' + userId;
             })
-            // You can redirect the user or update the UI here
+          
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -48,7 +49,7 @@ function signIn(email, password) {
 function signUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed up 
+           
             const user = userCredential.user;
             console.log('User signed up:', user);
             window.location.href = 'get-user-detail.html?uid=' + user.uid;
@@ -57,7 +58,7 @@ function signUp(email, password) {
             push(userRef, {
                 email: email, 
             })
-            // You can add additional user data to the database here if needed
+           
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -107,10 +108,37 @@ function loadDashboard() {
     }
 }
 
-// Call loadDashboard when the page loads
+
 if (welcomeMessage) {
     loadDashboard();
 }
+
+document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const videoFile = document.getElementById('videoInput').files[0];
+    formData.append('image', videoFile);
+
+    try {
+        const response = await fetch('http://74.225.249.32:5000/', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Image processing failed');
+        }
+
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `<h2>The output</h2><img src="${imageUrl}" alt="Grayscale Image">`;
+    } catch (error) {
+        alert(error.message);
+    }
+});
 
 const usersRef = ref(database, 'users');
 onValue(usersRef, (snapshot) => {
