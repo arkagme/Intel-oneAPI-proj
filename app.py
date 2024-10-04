@@ -29,7 +29,7 @@ def process_video():
         file.save(video_path)
 
         # Path where the processed image will be saved
-        processed_image_path = os.path.join(tmpdirname, 'processed.png')
+        processed_image_path = os.path.join(tmpdirname, 'smtgelse.png')
 
         # Run the video processing script
         # Ensure 'face_to_ecg.py' is in the same directory as 'app.py'
