@@ -115,6 +115,7 @@ if (welcomeMessage) {
 
 function getUID(){
     const urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams.get('uid'))
     return urlParams.get('uid');
 }
 
@@ -136,7 +137,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
             body: formData,
-            uid : getUID()
+            uid : "2345"
         });
         console.log(response);
 
