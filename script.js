@@ -139,7 +139,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
             body: formData,
             uid : getUID()
         });
-        console.log(response);
+        console.log(response.uid);
 
         if (!response.ok) {
             const errorText = await response.text();
