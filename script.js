@@ -148,7 +148,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
         // Force browser to reload the image
         const resultDiv = document.getElementById('result');
-        print(getUID())
+        console.log(getUID())
         resultDiv.innerHTML = `<img src="smtgelse.png" alt="Processed Image">`;
 
     } catch (error) {
