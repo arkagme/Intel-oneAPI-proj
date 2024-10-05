@@ -306,7 +306,7 @@ skin_chroma = cp.array(
     cv.cvtColor(np.array([[frame[math.ceil(video_height / 2), math.ceil(video_width / 2)]]]), cv.COLOR_BGR2YUV),
     dtype=cp.float32)[0, 0, 1:3]
 # First loop: analysis
-print('First pass: analysing video...')
+#print('First pass: analysing video...')
 i = 0
 t0 = time.time()
 while True:
