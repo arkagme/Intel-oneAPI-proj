@@ -418,7 +418,8 @@ ax.set_ylabel('RGB')
 # plt.show()
 current_time = datetime.now()
 formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-file_to_store = uid+"1"+".png"
+save_dir = r"C:\Users\saiet\JupyterNotebooks\intel_thingy\Intel-oneAPI-proj"
+file_to_store = os.fsdecode(save_dir+f'\{uid}'+"1"+".png")
 plt.savefig(file_to_store)
 
 data2 = {'time': np.array(range(100, int(total_frames) - 100)) / fps,
