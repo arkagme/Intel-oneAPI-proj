@@ -113,16 +113,16 @@ if (welcomeMessage) {
     loadDashboard();
 }
 
+function getUID(){
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('uid');
+}
+
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const fileInput = document.getElementById('videoInput');
     const file = fileInput.files[0];
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) =>{
-    const user = userCredential.user;
-    const userId = user.uid;
-    })
 
     if (!file) {
         alert('Please select a file');
@@ -136,7 +136,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
             body: formData,
-            uid : userId
+            uid : getUID()
         });
         console.log(response);
 
