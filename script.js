@@ -258,7 +258,7 @@ function parseDate(dateStr) {
 }
 
 // Get UID and listen for updates
-const uid = getUID();
+const uid = getUID2();
 if (uid) {
     listenToUserData(uid);
 } else {
