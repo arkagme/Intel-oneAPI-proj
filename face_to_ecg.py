@@ -55,7 +55,7 @@ def csv_xyz(filename, data, names):
     csv_append(filename, data)
 
 def mouseRGB(event, x, y, flags, params):
-    print(x,y)
+    #print(x,y)
     global skin_chroma
     if event == cv.EVENT_LBUTTONDOWN:
         skin_chroma = cp.array(cv.cvtColor(np.array([[frame[y,x]]]), cv.COLOR_BGR2YUV), dtype=cp.float32)[0,0,1:3]
@@ -440,7 +440,11 @@ if inpt[2]=='M':
 else:
     inpt[2]=0
 prediction = predictor.pipe(uid+"1",inpt)
-print(prediction[0])
-url_creator.add_history(uid,file_to_store,int(prediction[0]))
+print(prediction)
+if list(prediction).count(1)>=2:
+    predic=1
+else:
+    predic=0
+url_creator.add_history(uid,file_to_store,predic)
 
 # Reopen the videourlzzzz
