@@ -150,7 +150,6 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         // Force browser to reload the image
         const resultDiv = document.getElementById('result');
         const finalDiv = document.getElementById('final');
-        console.log(getUID());
         resultDiv.innerHTML = `<img src="${getUID1()}1.png" alt="Processed Image">`;
         finalDiv.innerHTML = ``
 
