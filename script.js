@@ -209,18 +209,27 @@ function listenToUserData(uid) {
             Object.keys(history).forEach(date => {
                 const historyEntry = history[date];
 
-                // Assuming 'status' is part of each history entry (replace with appropriate keys)
-                const status = historyEntry.status !== undefined ? historyEntry.status : 'Unknown';
-                const ecgImg = historyEntry.ecgImg || '';  // Default empty string if no ecgImg
-
-                // Create elements for each entry in history
                 const statusElement = document.createElement('p');
                 const dateElement = document.createElement('p');
                 const ecgImgElement = document.createElement('img');
-
-                // Set the text content and attributes
                 statusElement.textContent = `Status: ${status}`;
-                dateElement.textContent = `Date: ${parseDate(date)}`;  // Parse the date string
+                // Assuming 'status' is part of each history entry (replace with appropriate keys)
+                const status = historyEntry.status !== undefined ? historyEntry.status : 'Unknown';
+                const ecgImg = historyEntry.ecgImg || '';  // Default empty string if no ecgImg
+                if( status == 0 ){
+                    statusElement.textContent = "You are all good to go !!";
+                }
+                else if( status == 1){
+                    statusElement.textContent = "It is advisable to consult a doctor";
+                }
+                else{
+                    console.log(Error)
+                }
+                dateElement.textContent = `Date: ${parseDate(date)}`;
+
+
+
+                // Set the text content and attributes  // Parse the date string
 
                 // Check if ecgImg is a valid URL and create an image element if it exists
                 if (ecgImg) {

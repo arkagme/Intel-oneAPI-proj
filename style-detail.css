@@ -4,11 +4,11 @@ body{
     justify-content: center;
     align-items: center;
     margin-top : 100px;
-    background-color: black;
+    background-color: rgb(249, 230, 206);
 }
 h1{
     margin : none;
-    color: #ffffff;
+    color: black;
     font-family: "Montserrat", sans-serif;
 }
 input{

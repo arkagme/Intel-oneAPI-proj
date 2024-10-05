@@ -4,15 +4,15 @@ body{
     justify-content: center;
     align-items: center;
     margin-top : 100px;
-    background-color: black
+    background-color: rgb(249, 230, 206);
 }
 h1{
     margin : none;
-    color: white;
+    color: black;
     font-family: "Montserrat", sans-serif;
 }
 label{
-    color: white;
+    color: black;
     font-family: "Montserrat", sans-serif;
     font-size: large;
     margin : 0px 100px;
@@ -45,7 +45,7 @@ button{
 }
 
 #final{
-    color : white;
+    color : black;
     font-family: "Montserrat", sans-serif;
 }
 

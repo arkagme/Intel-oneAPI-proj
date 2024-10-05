@@ -3,11 +3,11 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     padding: none;
-    background-color: black;
-    margin : none;
+    background-color: rgb(249, 230, 206);
+    margin : 0 0 0 0;;
     font-family: "Montserrat", sans-serif;
+    margin : none;
 }
 input{
     margin : 10px 20px 10px 20px;
@@ -16,8 +16,8 @@ input{
     border-radius: 5px;
     font-size: large;
     font-family: "Montserrat", sans-serif;
-    color: #ffffff;
-    background-color: grey;
+    color: black;
+    background-color: rgb(195, 194, 194);
 
 }
 button{
@@ -29,6 +29,7 @@ button{
     font-size: medium;
     cursor: pointer;
     font-family: "Montserrat", sans-serif;
+    border : 1px solid black;
 }
 
 
@@ -42,11 +43,30 @@ button{
 
 h1{
     margin : none;
-    color: white
+    color: black
 }
 h3{
     margin : none;
-    color: white
+    color: black;
+}
+
+#header{
+    height: 150px;
+    padding: none;
+    margin:none;
+    background-color: rgb(127, 26, 204);
+    width: 100%;
+}
+img{
+    width : 30%;
+    height : 80%;
+    margin-left : 510px;
+    margin-top: 30px;
+    
+
+
 
 }
+
+
 
