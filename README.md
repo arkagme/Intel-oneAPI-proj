@@ -1,3 +1,5 @@
+
+https://github.com/user-attachments/assets/e1af5cfe-58ac-4413-9313-d9821ca3b3ef
 # Intel-oneAPI Hackathon Project
 Project submitted for Intel-oneAPI hackathon
 Oct 4-5, 2024
@@ -14,7 +16,11 @@ Over 27% of people aged above the age of 27 suffer from heart disease. Such peop
 # Our Solution:
 1. Our solution is strongly inspired from smart watches capable of making heart rate predictions. We use a motion amplification technique to obtain the ECG graph and the corresponding CSV time series data of the patient with just a video clip of them infront of a camera. This technology is similar to the ones used in smart watches to make heart rate predictions.
 2. The motion amplification is a propriety video processing algorithm that detects subtle motions and amplifies it to a level visible to the naked eye. Further, these amplified motions can be used to simulate one's heart rate and as such, their ECG.
-(SAMSHU GREEN FACE IMAGE).
+  
+
+https://github.com/user-attachments/assets/68062fd5-a4ff-4f9a-a555-cdec436bbc67
+
+
 3. Our webapp allows users to login  and upload a minimum of 30-second video and get a ECG graph generated which is used to predict any heart abnormalities. We have a secure login system with a email and password. This account is used to store all your past ECG graph datas and predictions.
 4. All user data stays confidential with limited access to the doctor. This is achieved by the usage of Firebase - Realtime Database, Authentication and Storage.
 5. We made use of Intels OneAPI Toolkit to build a predictive model to detect if the the patient has a heart anomoly.
@@ -23,7 +29,12 @@ Over 27% of people aged above the age of 27 suffer from heart disease. Such peop
 7. Further, we make use of the oneDAL toll module 'daal4py' to patch the base scikit-learn module and accelerate our model training and data processing by manifolds.
 8. For data preprocessing, we used a MinMaxScaler from the scikit-learn-intelex module  and feature extraction along the time and frequency domains for more efficient computations.
 9. Finally our simplified front end completes our solution with all neccessary data being passed and forwarded to their respective destinations. Here, one needs to upload a 30 sec video of their face in a well-lit environment following which, the model would claasify their heart-rate patterns based on the 3-channel ecg data our technique computes. Then based on a voting mechanism between these 3 channel-wise predictions, the final output is calculated.
-(CSS FINAL PAGE IMAGE)
+
+
+![image](https://github.com/user-attachments/assets/3f802b93-4822-4ae4-8721-5c99ddf6c70c)
+
+
+
 
 # Credits and Acknowledgments:
 1. Sai Etihas Chanda - (Author)
