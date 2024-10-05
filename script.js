@@ -31,7 +31,7 @@ function signIn(email, password) {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
 
-             const user = userCredential.user;
+            const user = userCredential.user;
             const userId = user.uid;
             console.log('User signed in:', user);
             window.location.href = 'dashboard.html?uid=' + userId;
@@ -118,8 +118,11 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
     const fileInput = document.getElementById('videoInput');
     const file = fileInput.files[0];
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) =>{
     const user = userCredential.user;
     const userId = user.uid;
+    })
 
     if (!file) {
         alert('Please select a file');
