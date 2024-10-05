@@ -46,9 +46,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", "--file", dest="filename",
                     help="Process a video file rather than a capture device.", metavar="FILE")
-# This argument currently doesn't do anything, I wanted to make this user-friendly but never got around to it!
-parser.add_argument('-o','--out', dest='output_path',default='./testfolder',
-                    help='Temporary output path')
+parser.add_argument("-u","--uid",dest = "uid",help='unique id')
 args = parser.parse_args()
 
 # Write some data to files
@@ -223,7 +221,7 @@ def keypress_action(keypress):
 
 # Hardcoded values
 # capture_device = 0  # Set to the camera device, e.g., 0 for default camera
-uid = "OYkHeVYEU9Zi2YxmDXK0Wu6YiT82"
+uid = args.uid
 video_filename = "uploads/THIRTY.mp4"  # Set this to a file path if you're using a video file
 video_width = 1920
 # Hardcoded resolution width
