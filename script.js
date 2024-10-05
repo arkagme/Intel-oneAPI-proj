@@ -31,7 +31,7 @@ function signIn(email, password) {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
 
-             const user = userCredential.user;
+            const user = userCredential.user;
             const userId = user.uid;
             console.log('User signed in:', user);
             window.location.href = 'dashboard.html?uid=' + userId;
@@ -116,10 +116,29 @@ if (welcomeMessage) {
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const fileInput = document.getElementById('videoInput');
+    const file = fileInput.files[0];
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) =>{
+    const user = userCredential.user;
+    const userId = user.uid;
+    })
+
+    if (!file) {
+        alert('Please select a file');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
     try {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
+            body: formData,
+            uid : userId
         });
+        console.log(response);
 
         if (!response.ok) {
             const errorText = await response.text();
@@ -127,14 +146,19 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         }
 
         // Force browser to reload the image
-        const timestamp = new Date().getTime();
-        const resultDiv = document.getElementById('resultDiv');
-        resultDiv.innerHTML = `<img src="http://localhost:5000/static/smtgelse.png?t=${timestamp}" alt="Processed Image">`;
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `<img src="smtgelse.png" alt="Processed Image">`;
+
+        const img = resultDiv.querySelector('img');
+        img.onload = () => {
+            URL.revokeObjectURL(imageUrl);
+        };
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         alert(`Error: ${error.message}`);
     }
 });
+
 
 const usersRef = ref(database, 'users');
 onValue(usersRef, (snapshot) => {
