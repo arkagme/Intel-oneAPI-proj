@@ -43,3 +43,12 @@ button{
     align-items: center;
     font-family: "Montserrat", sans-serif;
 }
+
+#final{
+    color : white;
+}
+
+#result{
+
+    margin-top: 20px;
+}
