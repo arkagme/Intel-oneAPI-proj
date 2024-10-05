@@ -52,7 +52,7 @@ def make_pred(data):
     return models.predict(scaler.fit_transform(data))
 
 def pipe(fil,input):
-    testmeta = pd.read_csv(fil).T
+    testmeta = pd.read_csv(fil+".csv").T
     extra = np.array([[int(input[1]),int(input[2])]]*3)
     data = np.asarray(extract(np.array(testmeta)))
     data = np.concatenate([extra,data],axis=1)

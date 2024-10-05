@@ -19,7 +19,7 @@ def url(image_path):
     #print(f"Image uploaded successfully. Public URL: {public_url}")
     return public_url
 
-def add_history(uid,png):
+def add_history(uid,png,p):
     current_date = datetime.now()
     formatted_date = current_date.strftime("%Y-%m-%d")
     #formatted_date = str(formatted_date)
@@ -27,7 +27,8 @@ def add_history(uid,png):
     img_url = url(png)
 
     user_ref = db.reference(f'/{uid}/history/{formatted_date}')
-    user_ref.set({'ecgImg': img_url})
+    user_ref.set({'ecgImg': img_url,
+                  'status':p})
     print("updation successful")
 
 def get_details(uid):
@@ -46,3 +47,5 @@ def get_details(uid):
     else:
         print("User data not found.")
         return None
+
+print(get_details("OYkHeVYEU9Zi2YxmDXK0Wu6YiT82"))

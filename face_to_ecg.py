@@ -1,6 +1,7 @@
 ######################
 ### USER VARIABLES ###
 ######################
+import predictor
 
 # Square this because I'll be lazily not-square-rooting later
 chroma_similarity = 10**2
@@ -45,9 +46,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", "--file", dest="filename",
                     help="Process a video file rather than a capture device.", metavar="FILE")
-# This argument currently doesn't do anything, I wanted to make this user-friendly but never got around to it!
-parser.add_argument('-w','--welch', dest='welch_flag', action=argparse.BooleanOptionalAction,
-                    help='Compute heart rate using the Welch estimator.')
+parser.add_argument("-u","--uid",dest = "uid",help='unique id')
 args = parser.parse_args()
 
 # Write some data to files
@@ -222,7 +221,8 @@ def keypress_action(keypress):
 
 # Hardcoded values
 # capture_device = 0  # Set to the camera device, e.g., 0 for default camera
-video_filename = "THIRTY.mp4"  # Set this to a file path if you're using a video file
+uid = args.uid
+video_filename = "uploads/THIRTY.mp4"  # Set this to a file path if you're using a video file
 video_width = 1920
 # Hardcoded resolution width
 video_height = 1080  # Hardcoded resolution height
@@ -377,7 +377,7 @@ while os.path.exists(mypath):
 os.makedirs(mypath)
 
 csv_xyz(os.path.join(mypath, 'ppg-rgb.csv'), cp.asnumpy(cp.array(ppg_rgb, dtype=cp.float64)), ['b', 'g', 'r'])
-csv_xyz(os.path.join(mypath, 'ppg-rgb-ma.csv'), cp.asnumpy(cp.array(ppg_rgb_ma, dtype=cp.float64)), ['b', 'g', 'r'])
+csv_xyz(os.path.join( uid+"1.csv"), cp.asnumpy(cp.array(ppg_rgb_ma, dtype=cp.float64)), ['b', 'g', 'r'])
 csv_xyz(os.path.join(mypath, 'ppg-yuv.csv'), cp.asnumpy(cp.array(ppg_yuv, dtype=cp.float64)), ['y', 'u', 'v'])
 csv_xyz(os.path.join(mypath, 'ppg-yuv-ma.csv'), cp.asnumpy(cp.array(ppg_yuv_ma, dtype=cp.float64)), ['y', 'u', 'v'])
 
@@ -418,7 +418,7 @@ ax.set_ylabel('RGB')
 # plt.show()
 current_time = datetime.now()
 formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-file_to_store = f"{formatted_time}.png"
+file_to_store = uid+"1"+".png"
 plt.savefig(file_to_store)
 
 data2 = {'time': np.array(range(100, int(total_frames) - 100)) / fps,
@@ -433,6 +433,13 @@ ax.plot('time', 'luminance', data=data2, color='black')
 ax.set_xlabel('time')
 ax.set_ylabel('YUV')
 # plt.show()
-plt.savefig("smtgelse.png")
-url_creator.add_history("5Jexko4y8WYiTETogfnouLkPnTP2",file_to_store)
+inpt = url_creator.get_details(uid)
+if inpt[2]=='M':
+    inpt[2]=1
+else:
+    inpt[2]=0
+prediction = predictor.pipe(uid+"1",inpt)
+print(prediction[0])
+url_creator.add_history(uid,file_to_store,int(prediction[0]))
+
 # Reopen the videourlzzzz
