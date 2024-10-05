@@ -118,6 +118,8 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
     const fileInput = document.getElementById('videoInput');
     const file = fileInput.files[0];
+    const user = userCredential.user;
+    const userId = user.uid;
 
     if (!file) {
         alert('Please select a file');
