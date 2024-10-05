@@ -55,7 +55,7 @@ def csv_xyz(filename, data, names):
     csv_append(filename, data)
 
 def mouseRGB(event, x, y, flags, params):
-    print(x,y)
+    #print(x,y)
     global skin_chroma
     if event == cv.EVENT_LBUTTONDOWN:
         skin_chroma = cp.array(cv.cvtColor(np.array([[frame[y,x]]]), cv.COLOR_BGR2YUV), dtype=cp.float32)[0,0,1:3]
@@ -274,8 +274,7 @@ cv.namedWindow('StattoBPM')
 # cv.setMouseCallback('StattoBPM', mouseRGB)
 
 # If this is a video file, start a loop to set the chroma key in advance of processing
-print(
-    'Displaying random frames. Click to set chroma. Press A to toggle chroma key view and O once you\'re ready to go!')
+#print('Displaying random frames. Click to set chroma. Press A to toggle chroma key view and O once you\'re ready to go!')
 if is_video_file:
     while True:
         # Get a random frame somewhere near the middle of the video
@@ -307,7 +306,7 @@ skin_chroma = cp.array(
     cv.cvtColor(np.array([[frame[math.ceil(video_height / 2), math.ceil(video_width / 2)]]]), cv.COLOR_BGR2YUV),
     dtype=cp.float32)[0, 0, 1:3]
 # First loop: analysis
-print('First pass: analysing video...')
+#print('First pass: analysing video...')
 i = 0
 t0 = time.time()
 while True:
@@ -440,7 +439,11 @@ if inpt[2]=='M':
 else:
     inpt[2]=0
 prediction = predictor.pipe(uid+"1",inpt)
-print(prediction[0])
-url_creator.add_history(uid,file_to_store,int(prediction[0]))
+print(prediction)
+if list(prediction).count(1)>=2:
+    predic=1
+else:
+    predic=0
+url_creator.add_history(uid,file_to_store,predic)
 
 # Reopen the videourlzzzz
