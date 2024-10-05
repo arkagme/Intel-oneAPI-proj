@@ -5,9 +5,9 @@ body{
     align-items: center;
     height: 100vh;
     padding: none;
-    background-color: pink;
+    background-color: black;
     margin : none;
-    font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 input{
     margin : 10px 20px 10px 20px;
@@ -15,7 +15,7 @@ input{
     border : none;
     border-radius: 5px;
     font-size: large;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: #ffffff;
     background-color: grey;
 
@@ -28,7 +28,7 @@ button{
     size : medium;
     font-size: medium;
     cursor: pointer;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 
@@ -42,11 +42,11 @@ button{
 
 h1{
     margin : none;
-    color: #3e3d3d;
+    color: white
 }
 h3{
     margin : none;
-    color: #3e3d3d;
+    color: white
 
 }
 

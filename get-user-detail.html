@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
+    <link rel="stylesheet" href="./style-detail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Complete Your Profile</h1>
     <form id="userDetailsForm">
+        <div id="list">
         <input type="text" id="nameInput" placeholder="Enter your name" required></input>
         <input type="number" id="ageInput" required placeholder="Enter Age"></input>
         <input type="text" id="genderInput" required placeholder="Enter Gender M or F"></input>
+        </div>
         <button type="submit">Submit</button>
     </form>
     <script type="module" src="./user-update-script.js"></script>
