@@ -177,7 +177,7 @@ function getUID2() {
 
 // Function to listen for user data based on the UID
 function listenToUserData(uid) {
-    const userRef = ref(database, 'users/' + uid);
+    const userRef = ref(database, '/' + uid);
     
     onValue(userRef, (snapshot) => {
         const user = snapshot.val();
