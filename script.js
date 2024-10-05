@@ -14,9 +14,9 @@ const firebaseConfig = {
     measurementId: "G-3RKMDQHT1E"
   };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const database = getDatabase(app);
+let app = initializeApp(firebaseConfig);
+let auth = getAuth(app);
+let database = getDatabase(app);
 
 const emailInput = document.getElementById('email-input');
 const passwordInput = document.getElementById('password-input');
@@ -149,8 +149,11 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
         // Force browser to reload the image
         const resultDiv = document.getElementById('result');
+        const finalDiv = document.getElementById('final');
         console.log(getUID());
         resultDiv.innerHTML = `<img src="${getUID()}1.png" alt="Processed Image">`;
+        finalDiv.innerHTML = 
+
 
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
@@ -159,8 +162,40 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 });
 
 
-const usersRef = ref(database, 'users');
-onValue(usersRef, (snapshot) => {
+let usersRef1 = ref(database, 'users');
+onValue(usersRef1, (snapshot) => {
     const data = snapshot.val();
     console.log('Users data:', data);
+});
+
+let usersRef2 = ref(database, 'users');
+onValue(usersRef2, (snapshot) => {
+    const data = snapshot.val();
+    const finalDiv = document.getElementById('final');  // Get finalDiv
+    finalDiv.innerHTML = '';  // Clear previous content
+
+    if (data) {
+        // Loop through all users and update `finalDiv` with status and date
+        Object.keys(data).forEach(userId => {
+            const user = data[userId];
+            const status = user.status || 'Unknown';  // Default status if not available
+            const date = user.date || 'Unknown Date'; // Default date if not available
+
+            // Create new elements for status and date
+            const statusElement = document.createElement('p');
+            const dateElement = document.createElement('p');
+
+            // Set the text content of the elements
+            statusElement.textContent = `Status: ${status}`;
+            dateElement.textContent = `Last Updated: ${date}`;
+
+            // Append the new elements to finalDiv
+            finalDiv.appendChild(statusElement);
+            finalDiv.appendChild(dateElement);
+        });
+    } else {
+        finalDiv.textContent = 'No user data available';
+    }
+}, {
+    onlyOnce: false // Keeps listening for real-time updates
 });
