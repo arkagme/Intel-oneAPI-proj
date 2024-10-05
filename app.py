@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 # Initialize Cron
-CORS(app, resources={r"/*": {"origins": "http://localhost:8000"}})
+CORS(app)
 
 # Specify the upload and output directories
 UPLOAD_FOLDER = 'uploads'
@@ -32,9 +32,10 @@ def upload_video():
     file.save(video_path)
 
     # Process the video using face_to_ecg.py
-    output_image_path = os.path.join(OUTPUT_FOLDER, 'smtgelse.png')
+
+    output_image_path = os.path.join('smtgelse.png')
     try:
-        subprocess.run(['python', 'face_to_ecg.py', '-f', video_path, '-o', output_image_path], check=True)
+        subprocess.run(['python', 'face_to_ecg.py', '-f', video_path, '-u', 'OYkHeVYEU9Zi2YxmDXK0Wu6YiT82'], check=True)
     except subprocess.CalledProcessError as e:
         return jsonify({'error': f'Processing failed: {e}'}), 500
 
