@@ -151,7 +151,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         const resultDiv = document.getElementById('result');
         const finalDiv = document.getElementById('final');
         console.log(getUID());
-        resultDiv.innerHTML = `<img src="${getUID()}1.png" alt="Processed Image">`;
+        resultDiv.innerHTML = `<img src="${getUID1()}1.png" alt="Processed Image">`;
         finalDiv.innerHTML = ``
 
 
@@ -207,9 +207,8 @@ function listenToUserData(uid) {
             const history = user.history || {};
 
             Object.keys(history).forEach(date => {
-                const historyEntry = history[date];
-                const status = historyEntry.status !== undefined ? historyEntry.status : 'Unknown';  // Default status
-                const ecgImg = historyEntry.ecgImg || '';  // Default empty string if no ecgImg
+                const status = history.status
+                const ecgImg = history.ecgImg || ''; 
 
                 // Create elements for each entry in history
                 const statusElement = document.createElement('p');
@@ -221,11 +220,6 @@ function listenToUserData(uid) {
                 dateElement.textContent = `Date: ${date}`;
                 
                 // Check if ecgImg is a URL and create an image if it is
-                if (ecgImg) {
-                    ecgImgElement.src = ecgImg;
-                    ecgImgElement.alt = `ECG Image for ${userName} on ${date}`;
-                    ecgImgElement.style.width = '300px';  // Adjust the width as needed
-                }
 
                 // Append the history data to finalDiv
                 finalDiv.appendChild(dateElement);
