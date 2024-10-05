@@ -113,11 +113,6 @@ if (welcomeMessage) {
     loadDashboard();
 }
 
-function getUID(){
-    const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams.get('uid'))
-    return urlParams.get('uid');
-}
 
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     e.preventDefault();
