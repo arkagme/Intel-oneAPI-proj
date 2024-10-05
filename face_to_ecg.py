@@ -274,8 +274,7 @@ cv.namedWindow('StattoBPM')
 # cv.setMouseCallback('StattoBPM', mouseRGB)
 
 # If this is a video file, start a loop to set the chroma key in advance of processing
-print(
-    'Displaying random frames. Click to set chroma. Press A to toggle chroma key view and O once you\'re ready to go!')
+#print('Displaying random frames. Click to set chroma. Press A to toggle chroma key view and O once you\'re ready to go!')
 if is_video_file:
     while True:
         # Get a random frame somewhere near the middle of the video
