@@ -148,8 +148,8 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
         // Force browser to reload the image
         const resultDiv = document.getElementById('result');
-        console.log(getUID())
-        resultDiv.innerHTML = `<img src="smtgelse.png" alt="Processed Image">`;
+        console.log(getUID());
+        resultDiv.innerHTML = `<img src="${getUID()}1.png" alt="Processed Image">`;
 
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
