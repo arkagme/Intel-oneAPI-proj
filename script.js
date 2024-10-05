@@ -206,6 +206,7 @@ function listenToUserData(uid) {
             const history = user.history || {};
 
             Object.keys(history).forEach(date => {
+                console.log(date)
                 const status = history.status
                 const ecgImg = history.ecgImg || ''; 
 
