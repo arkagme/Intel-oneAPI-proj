@@ -169,16 +169,22 @@ onValue(usersRef1, (snapshot) => {
     console.log('Users data:', data);
 });
 
-const usersRef = ref(database, 'users');
-onValue(usersRef, (snapshot) => {
-    const data = snapshot.val();
-    const finalDiv = document.getElementById('final');  // Get finalDiv
-    finalDiv.innerHTML = '';  // Clear previous content
+// Get the UID from the URL parameters
+function getUID() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('uid');
+}
 
-    if (data) {
-        // Loop through all users
-        Object.keys(data).forEach(userId => {
-            const user = data[userId];
+// Listen to changes for the specific user based on the UID
+function listenToUserData(uid) {
+    const userRef = ref(database, 'users/' + uid);
+    
+    onValue(userRef, (snapshot) => {
+        const user = snapshot.val();
+        const finalDiv = document.getElementById('final');  // Get finalDiv
+        finalDiv.innerHTML = '';  // Clear previous content
+
+        if (user) {
             const userName = user.name || 'Unknown Name';  // Default name if not available
             const userAge = user.age || 'Unknown Age';  // Default age if not available
             const userGender = user.gender || 'Unknown Gender';  // Default gender if not available
@@ -228,10 +234,19 @@ onValue(usersRef, (snapshot) => {
                     finalDiv.appendChild(ecgImgElement);
                 }
             });
-        });
-    } else {
-        finalDiv.textContent = 'No user data available';
-    }
-}, {
-    onlyOnce: false // Keeps listening for real-time updates
-});
+        } else {
+            finalDiv.textContent = 'No user data available';
+        }
+    }, {
+        onlyOnce: false // Keeps listening for real-time updates
+    });
+}
+
+// Get UID and listen for updates
+const uid = getUID();
+if (uid) {
+    listenToUserData(uid);
+} else {
+    console.error("UID not found in the URL.");
+}
+
