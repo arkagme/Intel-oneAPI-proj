@@ -137,7 +137,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
             body: formData,
-            uid : "2345"
+            uid : getUID()
         });
         console.log(response);
 
@@ -148,12 +148,9 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
         // Force browser to reload the image
         const resultDiv = document.getElementById('result');
+        print(getUID())
         resultDiv.innerHTML = `<img src="smtgelse.png" alt="Processed Image">`;
 
-        const img = resultDiv.querySelector('img');
-        img.onload = () => {
-            URL.revokeObjectURL(imageUrl);
-        };
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         alert(`Error: ${error.message}`);
