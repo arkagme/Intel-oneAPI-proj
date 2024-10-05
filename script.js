@@ -169,30 +169,65 @@ onValue(usersRef1, (snapshot) => {
     console.log('Users data:', data);
 });
 
-let usersRef2 = ref(database, 'users');
-onValue(usersRef2, (snapshot) => {
+const usersRef = ref(database, 'users');
+onValue(usersRef, (snapshot) => {
     const data = snapshot.val();
     const finalDiv = document.getElementById('final');  // Get finalDiv
     finalDiv.innerHTML = '';  // Clear previous content
 
     if (data) {
-        // Loop through all users and update `finalDiv` with status and date
+        // Loop through all users
         Object.keys(data).forEach(userId => {
             const user = data[userId];
-            const status = user.status || 'Unknown';  // Default status if not available
-            const date = user.date || 'Unknown Date'; // Default date if not available
+            const userName = user.name || 'Unknown Name';  // Default name if not available
+            const userAge = user.age || 'Unknown Age';  // Default age if not available
+            const userGender = user.gender || 'Unknown Gender';  // Default gender if not available
 
-            // Create new elements for status and date
-            const statusElement = document.createElement('p');
-            const dateElement = document.createElement('p');
+            // Create elements for user's basic info
+            const nameElement = document.createElement('h3');
+            const ageElement = document.createElement('p');
+            const genderElement = document.createElement('p');
 
-            // Set the text content of the elements
-            statusElement.textContent = `Status: ${status}`;
-            dateElement.textContent = `Last Updated: ${date}`;
+            nameElement.textContent = `Name: ${userName}`;
+            ageElement.textContent = `Age: ${userAge}`;
+            genderElement.textContent = `Gender: ${userGender}`;
 
-            // Append the new elements to finalDiv
-            finalDiv.appendChild(statusElement);
-            finalDiv.appendChild(dateElement);
+            // Append user's basic info to finalDiv
+            finalDiv.appendChild(nameElement);
+            finalDiv.appendChild(ageElement);
+            finalDiv.appendChild(genderElement);
+
+            // Now, loop through the user's history if available
+            const history = user.history || {};
+
+            Object.keys(history).forEach(date => {
+                const historyEntry = history[date];
+                const status = historyEntry.status !== undefined ? historyEntry.status : 'Unknown';  // Default status
+                const ecgImg = historyEntry.ecgImg || '';  // Default empty string if no ecgImg
+
+                // Create elements for each entry in history
+                const statusElement = document.createElement('p');
+                const dateElement = document.createElement('p');
+                const ecgImgElement = document.createElement('img');
+
+                // Set the text content and attributes
+                statusElement.textContent = `Status: ${status}`;
+                dateElement.textContent = `Date: ${date}`;
+                
+                // Check if ecgImg is a URL and create an image if it is
+                if (ecgImg) {
+                    ecgImgElement.src = ecgImg;
+                    ecgImgElement.alt = `ECG Image for ${userName} on ${date}`;
+                    ecgImgElement.style.width = '300px';  // Adjust the width as needed
+                }
+
+                // Append the history data to finalDiv
+                finalDiv.appendChild(dateElement);
+                finalDiv.appendChild(statusElement);
+                if (ecgImg) {
+                    finalDiv.appendChild(ecgImgElement);
+                }
+            });
         });
     } else {
         finalDiv.textContent = 'No user data available';
