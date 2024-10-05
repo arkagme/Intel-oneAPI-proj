@@ -130,8 +130,10 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     try {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
-            body: formData
+            body: formData,
+            uid : userId
         });
+        console.log(response);
 
         if (!response.ok) {
             const errorText = await response.text();
