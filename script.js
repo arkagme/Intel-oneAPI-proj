@@ -132,12 +132,13 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
     const formData = new FormData();
     formData.append('file', file);
+    const uid = getUID();
+    formData.append('uid', uid); 
 
     try {
         const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
             body: formData,
-            uid : getUID()
         });
         console.log(response.uid);
 

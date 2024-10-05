@@ -23,7 +23,7 @@ def upload_video():
         return jsonify({'error': 'No file part'}), 400
 
     file = request.files['file']
-
+    uid = request.form.get('uid')
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
 
@@ -33,7 +33,7 @@ def upload_video():
 
     # Process the video using face_to_ecg.py
 
-    output_image_path = os.path.join('smtgelse.png')
+    output_image_path = os.path.join(f'{uid}1.png')
     try:
         subprocess.run(['python', 'face_to_ecg.py', '-f', video_path, '-u', 'OYkHeVYEU9Zi2YxmDXK0Wu6YiT82'], check=True)
     except subprocess.CalledProcessError as e:
