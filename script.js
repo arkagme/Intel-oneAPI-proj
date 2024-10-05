@@ -113,6 +113,11 @@ if (welcomeMessage) {
     loadDashboard();
 }
 
+function getUID1(){
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams.get('uid'))
+    return urlParams.get('uid');
+}
 
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -127,7 +132,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
     const formData = new FormData();
     formData.append('file', file);
-    const uid = getUID();
+    const uid = getUID1();
     formData.append('uid', uid); 
 
     try {
@@ -165,7 +170,7 @@ onValue(usersRef1, (snapshot) => {
 });
 
 // Get the UID from the URL parameters
-function getUID() {
+function getUID2() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('uid');
 }
@@ -238,7 +243,7 @@ function listenToUserData(uid) {
 }
 
 // Get UID and listen for updates
-const uid = getUID();
+const uid = getUID2();
 if (uid) {
     listenToUserData(uid);
 } else {
