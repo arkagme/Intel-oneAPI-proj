@@ -152,10 +152,11 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         const finalDiv = document.getElementById('final');
         console.log(getUID());
         resultDiv.innerHTML = `<img src="${getUID()}1.png" alt="Processed Image">`;
-        finalDiv.innerHTML = 
+        finalDiv.innerHTML = ``
 
 
-    } catch (error) {
+    } 
+    catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         alert(`Error: ${error.message}`);
     }
