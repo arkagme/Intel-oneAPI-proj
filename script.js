@@ -169,12 +169,13 @@ onValue(usersRef1, (snapshot) => {
 });
 
 // Get the UID from the URL parameters
+
 function getUID2() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('uid');
 }
 
-// Listen to changes for the specific user based on the UID
+// Function to listen for user data based on the UID
 function listenToUserData(uid) {
     const userRef = ref(database, 'users/' + uid);
     
@@ -206,9 +207,11 @@ function listenToUserData(uid) {
             const history = user.history || {};
 
             Object.keys(history).forEach(date => {
-                console.log(date)
-                const status = history.status
-                const ecgImg = history.ecgImg || ''; 
+                const historyEntry = history[date];
+
+                // Assuming 'status' is part of each history entry (replace with appropriate keys)
+                const status = historyEntry.status !== undefined ? historyEntry.status : 'Unknown';
+                const ecgImg = historyEntry.ecgImg || '';  // Default empty string if no ecgImg
 
                 // Create elements for each entry in history
                 const statusElement = document.createElement('p');
@@ -217,9 +220,14 @@ function listenToUserData(uid) {
 
                 // Set the text content and attributes
                 statusElement.textContent = `Status: ${status}`;
-                dateElement.textContent = `Date: ${date}`;
-                
-                // Check if ecgImg is a URL and create an image if it is
+                dateElement.textContent = `Date: ${parseDate(date)}`;  // Parse the date string
+
+                // Check if ecgImg is a valid URL and create an image element if it exists
+                if (ecgImg) {
+                    ecgImgElement.src = ecgImg;
+                    ecgImgElement.alt = `ECG Image for ${userName} on ${date}`;
+                    ecgImgElement.style.width = '300px';  // Adjust the width as needed
+                }
 
                 // Append the history data to finalDiv
                 finalDiv.appendChild(dateElement);
@@ -236,11 +244,23 @@ function listenToUserData(uid) {
     });
 }
 
+// Helper function to parse date string into a readable format
+function parseDate(dateStr) {
+    // Assuming dateStr is in format 'dd-mm-yyyy'
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+        const day = parts[0];
+        const month = parts[1];
+        const year = parts[2];
+        return `${day}/${month}/${year}`;  // Format it in a standard way (dd/mm/yyyy)
+    }
+    return 'Unknown Date';  // If the format is unexpected, return a default value
+}
+
 // Get UID and listen for updates
-const uid = getUID2();
+const uid = getUID();
 if (uid) {
     listenToUserData(uid);
 } else {
     console.error("UID not found in the URL.");
 }
-
