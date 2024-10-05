@@ -209,12 +209,13 @@ function listenToUserData(uid) {
             Object.keys(history).forEach(date => {
                 const historyEntry = history[date];
 
+
+                // Assuming 'status' is part of each history entry (replace with appropriate keys)
+                const status = historyEntry.status !== undefined ? historyEntry.status : 'Unknown';
                 const statusElement = document.createElement('p');
                 const dateElement = document.createElement('p');
                 const ecgImgElement = document.createElement('img');
                 statusElement.textContent = `Status: ${status}`;
-                // Assuming 'status' is part of each history entry (replace with appropriate keys)
-                const status = historyEntry.status !== undefined ? historyEntry.status : 'Unknown';
                 const ecgImg = historyEntry.ecgImg || '';  // Default empty string if no ecgImg
                 if( status == 0 ){
                     statusElement.textContent = "You are all good to go !!";
