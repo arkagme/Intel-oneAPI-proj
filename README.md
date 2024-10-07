@@ -5,7 +5,7 @@ Project submitted for Intel-oneAPI hackathon
 Oct 4-5, 2024
 
 # Problem Statement:
-Over 27% of people aged above the age of 27 suffer from heart disease. Such people often require a daily or regular readings of ECG(Electro Cardio Gram) to be taken and sent to their doctors for review. The problem lies in the natural tendency of elderly people to not perform tests properly or neglecting necessary procedures. This oversight is usually the result of the technology being too complicated, tedious and time consuming for elderly people to deal with.
+Over 27% of people aged above the age of 45 suffer from heart disease. Such people often require a daily or regular readings of ECG(Electro Cardio Gram) to be taken and sent to their doctors for review. The problem lies in the natural tendency of elderly people to not perform tests properly or neglecting necessary procedures. This oversight is usually the result of the technology being too complicated, tedious and time consuming for elderly people to deal with.
 
 # Tasks:
 1. The main issue with the mentioned problem statement is ease of use. Hence a way of addressing a simple way to make readings must be done.
