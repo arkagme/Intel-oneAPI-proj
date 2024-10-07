@@ -34,7 +34,14 @@ https://github.com/user-attachments/assets/68062fd5-a4ff-4f9a-a555-cdec436bbc67
 ![image](https://github.com/user-attachments/assets/3f802b93-4822-4ae4-8721-5c99ddf6c70c)
 
 
-
+# Future Goals:
+1.  To create different Patient and a Doctor profile option which allows a doctor to freely and easily access any of their patients' historical data as opposed to the current option of only a patient login.
+2.  To create specialized a mobile appilcation or a physical kit for this procedure.
+3.  Improve the UI for smoother experience.
+4.  To differentiate between the various possible causes of abnormality in the ECG into specific subclasses.
+5.  To improve the quality of our ECGs by removing backgorund of uploaded video and to focus on the patient's face alone.
+6.  To collect more labelled data to improve the performance of the predictions made as well as experiment with various other predictive architectures for the same.
+7.  To better optimize the process.
 
 # Credits and Acknowledgments:
 1. Sai Etihas Chanda - (Author)
