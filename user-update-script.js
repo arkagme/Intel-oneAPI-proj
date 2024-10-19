@@ -2,15 +2,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebas
 import { getDatabase, ref, set , push} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDRE096DfU3ZLC-yASMFEqtBDDuM-HIV74",
-    authDomain: "intel-oneapi.firebaseapp.com",
-    databaseURL: "https://intel-oneapi-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "intel-oneapi",
-    storageBucket: "intel-oneapi.appspot.com",
-    messagingSenderId: "745920387030",
-    appId: "1:745920387030:web:5e0343b1ace47803f9b677",
-    measurementId: "G-3RKMDQHT1E"
-};
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN ,
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID ,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID
+  };
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
